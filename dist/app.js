@@ -14,3 +14,8 @@ function render(){const q=$('search').value.toLowerCase();const rows=results.fil
 $('tabs').addEventListener('click',e=>{if(e.target.dataset.filter){filter=e.target.dataset.filter;page=0;render();}});$('search').addEventListener('input',()=>{page=0;render();});$('prev').addEventListener('click',()=>{page--;render();});$('next').addEventListener('click',()=>{page++;render();});
 $('export').addEventListener('click',()=>{const text=CSVCore.csv([['Status','Record key','Column','Original value','Updated value'],...results.map(r=>[r.status,r.key,r.field,r.before,r.after])]);const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='csv-comparison-report.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 $('reset').addEventListener('click',()=>{for(let i=0;i<2;i++){data[i]=null;raw[i]=null;$('file'+i).value='';$('drop'+i).classList.remove('loaded');$('desc'+i).textContent=i?'The version you want to check':'Your earlier export or baseline';$('meta'+i).textContent='CSV · UTF-8 · up to 10 MB';}$('schema').textContent='';configure();});
+
+function applyTheme(theme){document.documentElement.dataset.theme=theme;const dark=theme==='dark';$('theme').textContent=dark?'☀ Light mode':'☾ Dark mode';$('theme').setAttribute('aria-label',dark?'Switch to light theme':'Switch to dark theme');}
+let preferredTheme='dark';try{const saved=localStorage.getItem('csv-compare-theme');if(saved==='light'||saved==='dark')preferredTheme=saved;}catch{}
+applyTheme(preferredTheme);
+$('theme').addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(next);try{localStorage.setItem('csv-compare-theme',next);}catch{}});

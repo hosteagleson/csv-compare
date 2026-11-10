@@ -8,7 +8,7 @@ Two-file comparison using a shared unique key; selectable comparison columns; ad
 
 ## Privacy
 
-No external libraries, fonts, analytics, network calls, persistent storage or backend. Files are held in page memory until cleared or the page closes. Only the files explicitly selected by the visitor are read. The report is generated on demand locally. CSV formula-like cells receive an apostrophe prefix on export. Content is rendered as plain text.
+No external libraries, fonts, analytics, network calls, CSV storage or backend. Only the theme preference is saved in browser localStorage. Files are held in page memory until cleared or the page closes. Only the files explicitly selected by the visitor are read. The report is generated on demand locally. CSV formula-like cells receive an apostrophe prefix on export. Content is rendered as plain text.
 
 ## Validation
 
